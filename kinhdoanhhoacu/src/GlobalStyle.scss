@@ -1,0 +1,22 @@
+$primary-color: #d10024;
+$black: #15161d;
+$light-black: #1e1f29;
+$light-grey: #e4e7ed;
+$grey: #b9babc;
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@200;300;400;600;700&family=Roboto:wght@300;400;700&family=Ubuntu:wght@400;500;700&display=swap");
+* {
+  margin: 0 0;
+  font-family: "Montserrat", sans-serif;
+}
+li,
+ul,
+a {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+}
+a:hover {
+  transition: 0.3s;
+  cursor: pointer;
+  color: $primary-color;
+}

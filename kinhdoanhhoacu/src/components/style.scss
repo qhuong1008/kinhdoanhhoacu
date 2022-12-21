@@ -1,0 +1,204 @@
+@import "../GlobalStyle.scss";
+
+@keyframes moveToRight {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.col {
+  width: 297px;
+}
+.header {
+  margin: 0 0;
+  background-color: $black;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+.top-header {
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $light-black;
+  padding: 5px 35px;
+  font-size: 13px;
+
+  .icon {
+    color: $primary-color;
+    margin: 0 5px;
+  }
+}
+.header-links {
+  display: flex;
+  flex-direction: row;
+}
+.top-header-item {
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+  &:hover {
+    cursor: pointer;
+    color: $primary-color;
+  }
+}
+.header-red {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background-color: $primary-color;
+}
+.logo img {
+  width: 150px;
+}
+.header-menu {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-right: 30px;
+  font-size: 14px;
+}
+.header-menu-item {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
+  position: relative;
+  transition: 0.3s;
+  &:hover {
+    cursor: pointer;
+    color: $primary-color;
+  }
+  .icon {
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  input {
+    width: 270px;
+    height: 40px;
+    border: none;
+    padding-left: 10px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    outline: none;
+    font-size: 15px;
+  }
+  .search-btn {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: $primary-color;
+    color: white;
+    width: 60px;
+    height: 43px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    justify-content: center;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+.amount {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: $primary-color;
+  border-radius: 15px;
+  position: absolute;
+  right: -3px;
+  top: -8px;
+  color: white;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 10px;
+  line-height: 20px;
+}
+.navigation {
+  border-bottom: 2px solid $light-grey;
+  padding: 8px 25px;
+  line-height: 100%;
+}
+.nav-list {
+  display: flex;
+}
+.nav-item {
+  margin: 0 10px;
+  font-weight: 500;
+  height: 100%;
+  &:hover {
+    cursor: pointer;
+    color: $primary-color;
+    .underline {
+      animation: moveToRight 0.5s forwards;
+    }
+  }
+}
+.underline {
+  display: block;
+  width: 0%;
+  height: 2px;
+  margin-top: 2px;
+  background-color: $primary-color;
+}
+.footer-container {
+  background-color: $black;
+  color: white;
+}
+.footer-red {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background-color: $primary-color;
+}
+.footer {
+  padding: 50px 50px;
+}
+.footer-title {
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 23px;
+}
+.col p {
+  font-size: 15px;
+  color: $grey;
+}
+.col a {
+  color: $grey;
+}
+.footer-links {
+  font-size: 15px;
+  font-weight: 500;
+  li {
+    margin-top: 14px;
+  }
+  li a {
+  }
+  li .icon {
+    color: $primary-color;
+    margin-right: 10px;
+  }
+}
