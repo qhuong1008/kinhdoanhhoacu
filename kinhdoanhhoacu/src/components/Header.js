@@ -12,6 +12,7 @@ import {
   faDollarSign,
   faUser,
   faRightFromBracket,
+  faBox,
 } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
@@ -65,7 +66,12 @@ function Header() {
           <div className="header-menu-item">
             <FontAwesomeIcon icon={faCartShopping} className="icon" />
             <div className="amount">2</div>
-            Your Cart
+            Giỏ hàng
+          </div>
+          <div className="header-menu-item">
+            <FontAwesomeIcon icon={faBox} className="icon" />
+            <div className="amount">2</div>
+            Đơn hàng
           </div>
         </div>
       </div>

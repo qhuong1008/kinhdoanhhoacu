@@ -31,9 +31,7 @@ const HomePage = () => {
   useEffect(() => {
     loadAllSanPham();
   }, []);
-  if (isLoading) {
-    return <Loading />;
-  }
+
   return (
     <>
       <Header />
@@ -121,23 +119,27 @@ const HomePage = () => {
             </select>
           </div>
           <div className="store-product">
-            <div className="grid-3">
-              {sanphamlist.map((sanpham) => {
-                return (
-                  <ProductItem
-                    name={sanpham.TenSP}
-                    gia={sanpham.Gia}
-                    hinh={sanpham.Hinh}
-                    key={sanpham.MaSP}
-                    maSP={sanpham.MaSP}
-                  />
-                );
-              })}
-            </div>
+            {isLoading && <Loading />}
+            {!isLoading && (
+              <div className="grid-3">
+                {sanphamlist.map((sanpham) => {
+                  return (
+                    <ProductItem
+                      name={sanpham.TenSP}
+                      gia={sanpham.Gia}
+                      hinh={sanpham.Hinh}
+                      key={sanpham.MaSP}
+                      maSP={sanpham.MaSP}
+                    />
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       </div>
       <Footer />
+      {/* <Loading /> */}
     </>
   );
 };

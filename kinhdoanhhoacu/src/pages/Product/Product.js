@@ -39,41 +39,44 @@ function Product() {
       <Header />
       <BreadcrumbComponent />
       <div className="product-container">
-        <div className="row">
-          <div className="col product-img">
-            <img src={sanpham.Hinh} />
-          </div>
-          <div className="col product-info">
-            <div className="product-name">{sanpham.TenSP}</div>
-            <div className="product-price">
-              {sanpham.Gia}
-              <div className="product-old-price">500.000</div>
+        {isLoading && <Loading />}
+        {!isLoading && (
+          <div className="row">
+            <div className="col product-img">
+              <img src={sanpham.Hinh} />
             </div>
-            <div className="product-description">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat
-            </div>
-            <div className="product-quantity-container">
-              Số lượng:
-              <div className="product-quantity">
-                <button className="quantity-btn">-</button>
-                <input type="text" />
-                <button className="quantity-btn">+</button>
+            <div className="col product-info">
+              <div className="product-name">{sanpham.TenSP}</div>
+              <div className="product-price">
+                {sanpham.Gia}
+                <div className="product-old-price">500.000</div>
               </div>
-              <button className="add-to-cart-btn">
-                <FontAwesomeIcon icon={faCartShopping} className="icon" />
-                Thêm vào giỏ
-              </button>
-            </div>
+              <div className="product-description">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat
+              </div>
+              <div className="product-quantity-container">
+                Số lượng:
+                <div className="product-quantity">
+                  <button className="quantity-btn">-</button>
+                  <input type="text" />
+                  <button className="quantity-btn">+</button>
+                </div>
+                <button className="add-to-cart-btn">
+                  <FontAwesomeIcon icon={faCartShopping} className="icon" />
+                  Thêm vào giỏ
+                </button>
+              </div>
 
-            <div className="wishlist">
-              <FontAwesomeIcon icon={faHeart} className="icon" />
-              Thêm vào Wishlist
+              <div className="wishlist">
+                <FontAwesomeIcon icon={faHeart} className="icon" />
+                Thêm vào Wishlist
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
       <Footer />
     </>

@@ -1,4 +1,12 @@
 @import "../../GlobalStyle.scss";
+@keyframes Cart_moveToRight {
+  from {
+    width: 180px;
+  }
+  to {
+    width: 185px;
+  }
+}
 
 .product-container {
   display: flex;
@@ -13,7 +21,7 @@
     width: 100%;
   }
   .product-info {
-    width: 500px;
+    width: 600px;
     display: flex;
     flex-direction: column;
     margin-left: 10px;
@@ -42,7 +50,7 @@
     margin: 10px 10px;
     display: flex;
     justify-content: space-between;
-    height: 25px;
+    height: 30px;
     border: 1px solid $grey;
     width: 100px;
     input {
@@ -53,25 +61,26 @@
     .quantity-btn {
       font-size: 18px;
       width: 30px;
+      text-align: center;
     }
   }
 }
 
 .add-to-cart-btn {
   text-transform: uppercase;
+  width: 180px;
   margin-left: 20px;
-  width: auto;
-  height: auto;
+  height: 40px;
   background-color: $red;
   padding: 10px 16px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
   color: white;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  flex-direction: row;
-  transition: all 0.3s;
+  overflow: hidden;
+  justify-content: center;
   .icon {
     margin-right: 10px;
     display: none;
@@ -80,13 +89,16 @@
     background-color: white;
     color: $primary-color;
     border: 2px solid $primary-color;
-    width: auto;
+    height: 40px;
+    animation: Cart_moveToRight 0.5s forwards;
     .icon {
       display: flex;
+      flex-direction: row;
     }
   }
 }
 .wishlist {
+  width: 180px;
   margin: 10px 0;
   color: black;
   transition: 0.3s;
