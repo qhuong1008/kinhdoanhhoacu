@@ -49,7 +49,7 @@ function Header() {
         </div>
       </div>
       <div className="header">
-        <a href="#" className="logo">
+        <a href="/" className="logo">
           <img src={logo} />
         </a>
         <div className="search-container">

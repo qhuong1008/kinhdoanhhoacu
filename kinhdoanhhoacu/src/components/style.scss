@@ -8,13 +8,7 @@
     width: 100%;
   }
 }
-.row {
-  display: flex;
-  flex-direction: row;
-}
-.col {
-  width: 297px;
-}
+
 .header {
   margin: 0 0;
   background-color: $black;
@@ -145,7 +139,7 @@
   display: flex;
 }
 .nav-item {
-  margin: 0 10px;
+  margin: 10px 10px 10px 8px;
   font-weight: 500;
   height: 100%;
   &:hover {
@@ -201,4 +195,15 @@
     color: $primary-color;
     margin-right: 10px;
   }
+}
+.breadcrumb {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 30px 50px;
+  display: flex;
+  flex-direction: row;
+}
+.breadcrumb-item {
+  margin: 0 10px;
 }

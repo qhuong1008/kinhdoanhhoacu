@@ -1,0 +1,123 @@
+@import "../../GlobalStyle.scss";
+
+.homepage-container {
+  margin: 40px 30px;
+  display: flex;
+  flex-direction: row;
+}
+.aside {
+  width: 25%;
+}
+.aside-item {
+  margin-bottom: 30px;
+}
+.store {
+  width: 75%;
+}
+.aside-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+.checkbox-filter {
+  margin-top: 25px;
+}
+.checkbox-filter-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 5px 0;
+  &:hover {
+    cursor: pointer;
+  }
+  input {
+    margin-right: 7px;
+  }
+}
+.product-widget {
+  display: flex;
+  flex-direction: rows;
+  align-items: center;
+  margin: 10px 0;
+  img {
+    width: 60px;
+    height: 60px;
+  }
+}
+.product-body {
+  display: flex;
+  flex-direction: column;
+  text-transform: uppercase;
+}
+.product-category {
+  color: $font-grey;
+  font-size: 10px;
+}
+.product-name {
+  font-size: 13px;
+  font-weight: 700;
+}
+.product-price {
+  color: $primary-color;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.product-old-price {
+  color: $font-grey;
+  font-size: 10px;
+  text-decoration: line-through;
+  margin-left: 5px;
+}
+.combobox-filter {
+  width: 130px;
+  padding: 7px 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.store-filter {
+  margin-bottom: 30px;
+}
+.store-product {
+  .product {
+    border: 2px solid $grey;
+    transition: 0.3s;
+    &:hover {
+      border-color: $primary-color;
+    }
+  }
+  .product-img {
+    width: 100%;
+    height: 262px;
+    overflow: hidden;
+  }
+  img {
+    width: 100%;
+  }
+
+  .product-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .product-category {
+    margin-top: 10px;
+    font-size: 13px;
+  }
+  .product-name {
+    margin-top: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+    &:hover {
+      cursor: pointer;
+      color: $primary-color;
+    }
+  }
+  .product-price {
+    margin-top: 5px;
+    font-size: 15px;
+    padding-bottom: 15px;
+  }
+}
