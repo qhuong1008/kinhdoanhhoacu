@@ -39,8 +39,9 @@ function Product() {
       <Header />
       <BreadcrumbComponent />
       <div className="product-container">
-        {isLoading && <Loading />}
-        {!isLoading && (
+        {isLoading ? (
+          <Loading />
+        ) : (
           <div className="row">
             <div className="col product-img">
               <img src={sanpham.Hinh} />

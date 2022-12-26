@@ -6,15 +6,33 @@ import { useEffect, useState } from "react";
 import { SanPhamApi } from "../../api/index";
 import ProductItem from "../../components/ProductItem";
 import Loading from "../../components/Loading";
+import Pagination from "@mui/material/Pagination";
+import Paginate from "../../components/Paginate";
 
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [sanphamlist, setSanphamlist] = useState([]);
+  const [currentSanPhamList, setCurrentSanPhamList] = useState([]);
+  const [page, setPage] = useState(1);
+
+  const ProductPerPage = 9;
+
+  const paginate = (page) => {
+    setIsLoading(true);
+    setPage(page);
+    loadAllSanPham();
+  };
   const loadAllSanPham = () => {
+    const indexOfLastProduct = page * ProductPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - ProductPerPage;
     SanPhamApi.getSanPham()
       .then((response) => {
         setSanphamlist(response.data);
+        setCurrentSanPhamList(
+          response.data.slice(indexOfFirstProduct, indexOfLastProduct)
+        );
       })
+
       .then(() => setIsLoading(false))
       .catch((error) => {});
   };
@@ -119,16 +137,18 @@ const HomePage = () => {
             </select>
           </div>
           <div className="store-product">
-            {isLoading && <Loading />}
-            {!isLoading && (
+            {isLoading ? (
+              <Loading />
+            ) : (
               <div className="grid-3">
-                {sanphamlist.map((sanpham) => {
+                {currentSanPhamList.map((sanpham, index) => {
                   return (
                     <ProductItem
                       name={sanpham.TenSP}
+                      loaiSP={sanpham.TenLoaiSanPham}
                       gia={sanpham.Gia}
                       hinh={sanpham.Hinh}
-                      key={sanpham.MaSP}
+                      key={index}
                       maSP={sanpham.MaSP}
                     />
                   );
@@ -138,6 +158,12 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+
+      <Paginate
+        ProductPerPage={ProductPerPage}
+        tongSP={sanphamlist.length}
+        paginate={paginate}
+      />
       <Footer />
       {/* <Loading /> */}
     </>

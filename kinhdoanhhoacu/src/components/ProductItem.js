@@ -6,7 +6,7 @@ function ProductItem(props) {
         <img src={props.hinh} />
       </div>
       <div className="product-body">
-        <div className="product-category">Màu vẽ</div>
+        <div className="product-category">{props.loaiSP}</div>
         <a href={`/product/${props.maSP}`} className="product-name">
           {props.name}
         </a>

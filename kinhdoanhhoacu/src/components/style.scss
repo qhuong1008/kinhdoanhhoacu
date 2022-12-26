@@ -160,7 +160,7 @@
 }
 .footer-container {
   background-color: $black;
-  color: white;
+  color: white !important;
 }
 .footer-red {
   display: block;
@@ -187,11 +187,16 @@
 .footer-links {
   font-size: 15px;
   font-weight: 500;
+  color: white;
   li {
     margin-top: 14px;
+    color: $grey;
+    transition: 0.2s;
+    &:hover {
+      color: white;
+    }
   }
-  li a {
-  }
+
   li .icon {
     color: $primary-color;
     margin-right: 10px;
@@ -206,4 +211,28 @@
 .spinner-border {
   text-align: center !important;
   vertical-align: middle !important;
+}
+.pagination {
+  display: flex;
+  flex-direction: row;
+}
+.page-index {
+  width: 50px;
+  height: 50px;
+  background-color: $primary-color;
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white !important;
+  &:hover {
+    background-color: $grey;
+    color: $primary-color !important;
+    cursor: pointer;
+  }
+}
+.grid-9 {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-gap: 2px;
 }

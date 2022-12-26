@@ -1,0 +1,92 @@
+@import "../../GlobalStyle.scss";
+
+.checkout-container {
+  margin: 30px 30px;
+}
+.title {
+  text-transform: uppercase;
+  font-size: 23px;
+  font-weight: 700;
+  margin-top: 30px;
+}
+.form-info {
+  margin: 13px 0;
+  width: 90%;
+}
+.form-info input,
+.form-info textarea {
+  padding: 5px 10px;
+  width: 100%;
+  border: 1px solid $light-grey;
+}
+.order-title {
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+.order-detail {
+  border: 1px solid $light-grey;
+  padding: 10px 10px;
+  .title {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .row {
+    padding: 10px 10px;
+  }
+}
+.order-product {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+  .product-name {
+    font-weight: 400;
+    padding: 0;
+  }
+  .product-price {
+    color: black;
+    font-weight: 400;
+  }
+}
+.total-info {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.total-title {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 15px;
+}
+.total-price {
+  color: $primary-color;
+  font-weight: 700;
+  font-size: 23px;
+}
+.term-check {
+  display: flex;
+}
+.checkbox {
+  margin-right: 10px;
+}
+.checkout-btn {
+  width: 100%;
+  height: auto;
+  background-color: $primary-color;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 10px 10px;
+  text-align: center;
+  border-radius: 20px;
+  margin: 20px 0;
+  cursor: pointer;
+}
