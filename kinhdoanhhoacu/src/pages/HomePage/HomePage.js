@@ -8,12 +8,15 @@ import ProductItem from "../../components/ProductItem";
 import Loading from "../../components/Loading";
 import Pagination from "@mui/material/Pagination";
 import Paginate from "../../components/Paginate";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../redux/actions/productsActions";
 
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [sanphamlist, setSanphamlist] = useState([]);
   const [currentSanPhamList, setCurrentSanPhamList] = useState([]);
   const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
 
   const ProductPerPage = 9;
 
@@ -47,7 +50,8 @@ const HomePage = () => {
     });
   };
   useEffect(() => {
-    loadAllSanPham();
+    // loadAllSanPham();
+    dispatch(fetchProducts());
   }, []);
 
   return (
