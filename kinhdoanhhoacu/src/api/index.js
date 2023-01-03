@@ -1,2 +1,4 @@
 import * as SanPhamApi from "./SanPham/SanPhamApi";
-export { SanPhamApi };
+import * as NguoiDungApi from "./NguoiDung/NguoiDungApi";
+import * as CartApi from "./Cart/CartApi";
+export { SanPhamApi, NguoiDungApi, CartApi };
