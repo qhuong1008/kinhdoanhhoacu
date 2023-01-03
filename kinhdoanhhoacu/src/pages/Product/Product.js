@@ -13,27 +13,50 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { SanPhamApi } from "../../api";
 import Loading from "../../components/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductById } from "../../redux/actions/productsActions";
+import { AddToCart } from "../../redux/actions/cartAction";
 
 function Product() {
   const params = useParams();
-  console.log(params);
-  const [isLoading, setIsLoading] = useState(true);
-  const [sanpham, setSanpham] = useState({});
-  const loadSanPham = () => {
-    SanPhamApi.getSanPhamById(params.productId)
-      .then((response) => {
-        console.log(response.data);
-        setSanpham(response.data[0]);
-      })
-      .then(() => setIsLoading(false))
-      .catch((err) => {});
+  const dispatch = useDispatch();
+
+  const sanpham = useSelector((state) => state.product.product);
+  console.log("sanpham:", sanpham);
+  const isLoading = useSelector((state) => state.product.loading);
+
+  const [soLuong, setSoLuong] = useState(1);
+
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user);
+  let cart = {
+    maNguoiDung: "",
+    maSP: "",
+    soLuong: 1,
+  };
+  cart.maNguoiDung = user.MaNguoiDung;
+  cart.maSP = sanpham.MaSP;
+  cart.soLuong = soLuong;
+
+  const handleAddToCart = () => {
+    var message = "Thêm sản phẩm " + sanpham.MaSP + " vào giỏ hàng?";
+    if (window.confirm(message) == true) {
+      dispatch(AddToCart(cart));
+      alert("Thêm vào giỏ thành công!");
+    }
+  };
+  const handleDecrease = () => {
+    if (soLuong > 1) {
+      setSoLuong(soLuong - 1);
+    }
+  };
+  const handleIncrease = () => {
+    setSoLuong(soLuong + 1);
   };
   useEffect(() => {
-    loadSanPham();
+    dispatch(getProductById(params.productId));
   }, []);
-  if (isLoading) {
-    return <Loading />;
-  }
+
   return (
     <>
       <Header />
@@ -61,11 +84,19 @@ function Product() {
               <div className="product-quantity-container">
                 Số lượng:
                 <div className="product-quantity">
-                  <button className="quantity-btn">-</button>
-                  <input type="text" />
-                  <button className="quantity-btn">+</button>
+                  <button className="quantity-btn" onClick={handleDecrease}>
+                    -
+                  </button>
+                  <input
+                    type="text"
+                    value={soLuong}
+                    onChange={(e) => setSoLuong(e.target.value)}
+                  />
+                  <button className="quantity-btn" onClick={handleIncrease}>
+                    +
+                  </button>
                 </div>
-                <button className="add-to-cart-btn">
+                <button className="add-to-cart-btn" onClick={handleAddToCart}>
                   <FontAwesomeIcon icon={faCartShopping} className="icon" />
                   Thêm vào giỏ
                 </button>

@@ -9,36 +9,37 @@ import Loading from "../../components/Loading";
 import Pagination from "@mui/material/Pagination";
 import Paginate from "../../components/Paginate";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../redux/actions/productsActions";
+import { getAllProducts } from "../../redux/actions/productsActions";
 
 const HomePage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [sanphamlist, setSanphamlist] = useState([]);
-  const [currentSanPhamList, setCurrentSanPhamList] = useState([]);
-  const [page, setPage] = useState(1);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [sanphamlist, setSanphamlist] = useState([]);
+  // const [currentSanPhamList, setCurrentSanPhamList] = useState([]);
+  // const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
-  const ProductPerPage = 9;
+  // const ProductPerPage = 9;
 
-  const paginate = (page) => {
-    setIsLoading(true);
-    setPage(page);
-    loadAllSanPham();
-  };
-  const loadAllSanPham = () => {
-    const indexOfLastProduct = page * ProductPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - ProductPerPage;
-    SanPhamApi.getSanPham()
-      .then((response) => {
-        setSanphamlist(response.data);
-        setCurrentSanPhamList(
-          response.data.slice(indexOfFirstProduct, indexOfLastProduct)
-        );
-      })
+  // const paginate = (page) => {
+  //   setIsLoading(true);
+  //   setPage(page);
+  //   loadAllSanPham();
+  // };
+  // const loadAllSanPham = () => {
+  //   const indexOfLastProduct = page * ProductPerPage;
+  //   const indexOfFirstProduct = indexOfLastProduct - ProductPerPage;
+  //   SanPhamApi.getSanPham()
+  //     .then((response) => {
+  //       setSanphamlist(response.data);
+  //       setCurrentSanPhamList(
+  //         response.data.slice(indexOfFirstProduct, indexOfLastProduct)
+  //       );
+  //     })
 
-      .then(() => setIsLoading(false))
-      .catch((error) => {});
-  };
+  //     .then(() => setIsLoading(false))
+  //     .catch((error) => {});
+  // };
+
   const handleCheckbox = () => {
     let isChecked = $(".checkbox").is(":checked");
     $(".checkbox").each(() => {
@@ -49,9 +50,10 @@ const HomePage = () => {
       }
     });
   };
+  const sanPhamList = useSelector((state) => state.allProducts.products);
+  const isLoading = useSelector((state) => state.allProducts.loading);
   useEffect(() => {
-    // loadAllSanPham();
-    dispatch(fetchProducts());
+    dispatch(getAllProducts());
   }, []);
 
   return (
@@ -145,7 +147,7 @@ const HomePage = () => {
               <Loading />
             ) : (
               <div className="grid-3">
-                {currentSanPhamList.map((sanpham, index) => {
+                {sanPhamList.map((sanpham, index) => {
                   return (
                     <ProductItem
                       name={sanpham.TenSP}
@@ -163,11 +165,11 @@ const HomePage = () => {
         </div>
       </div>
 
-      <Paginate
+      {/* <Paginate
         ProductPerPage={ProductPerPage}
         tongSP={sanphamlist.length}
         paginate={paginate}
-      />
+      /> */}
       <Footer />
       {/* <Loading /> */}
     </>

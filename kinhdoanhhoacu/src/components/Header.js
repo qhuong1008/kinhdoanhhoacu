@@ -1,6 +1,7 @@
 import logo from "../assets/img/logo4.png";
 import style from "./style.scss";
 import GlobalStyle from "../GlobalStyle.scss";
+import { Link } from "react-router-dom";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,6 +17,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+  };
   return (
     <>
       <div className="top-header">
@@ -43,10 +47,12 @@ function Header() {
             <FontAwesomeIcon icon={faUser} className="icon" />
             My Accounts
           </div>
-          <div className="top-header-item">
-            <FontAwesomeIcon icon={faRightFromBracket} className="icon" />
-            Logout
-          </div>
+          <Link to="/login" onClick={handleLogout}>
+            <div className="top-header-item">
+              <FontAwesomeIcon icon={faRightFromBracket} className="icon" />
+              Logout
+            </div>
+          </Link>
         </div>
       </div>
       <div className="header">
@@ -63,11 +69,13 @@ function Header() {
             <div className="amount">2</div>
             Wishlist
           </div>
-          <div className="header-menu-item">
-            <FontAwesomeIcon icon={faCartShopping} className="icon" />
-            <div className="amount">2</div>
-            Giỏ hàng
-          </div>
+          <Link to="/cart">
+            <div className="header-menu-item">
+              <FontAwesomeIcon icon={faCartShopping} className="icon" />
+              <div className="amount">2</div>
+              Giỏ hàng
+            </div>
+          </Link>
           <div className="header-menu-item">
             <FontAwesomeIcon icon={faBox} className="icon" />
             <div className="amount">2</div>
