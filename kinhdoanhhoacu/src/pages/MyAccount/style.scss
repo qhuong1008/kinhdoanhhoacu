@@ -1,32 +1,38 @@
 @import "../../GlobalStyle.scss";
 
-.myacccount-page-container {
+.myacccount-page-container,
+.changepw-page-container {
   background-color: #f5f5f5;
   padding: 20px 20px;
   display: flex;
 }
-.myaccount-page-content {
+.myaccount-page-content,
+.changepw-page-content {
   background-color: white;
   width: 100%;
 }
-.myaccount-title {
+.myaccount-title,
+.changepw-title {
   padding: 20px 20px;
   font-size: 14px;
 }
 
-.myaccount-info-item {
+.myaccount-info-item,
+.changepw-info-item {
   display: flex;
   flex-direction: row;
   width: 100%;
   margin: 17px 0;
   align-items: center;
 }
-.myaccount-info-label {
+.myaccount-info-label,
+.changepw-info-label {
   width: 20%;
   text-align: right;
   margin-right: 10px;
 }
-.myaccount-info-input {
+.myaccount-info-input,
+.changepw-info-input {
   width: 70%;
   border: 1px solid $light-grey;
   padding: 5px 10px;

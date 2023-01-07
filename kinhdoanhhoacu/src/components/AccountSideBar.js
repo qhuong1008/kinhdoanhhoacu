@@ -10,6 +10,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const AccountSideBar = () => {
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user);
   return (
     <>
       <div className="sidebar-container">
@@ -18,10 +20,7 @@ const AccountSideBar = () => {
             <img src="https://cf.shopee.vn/file/7e03f703b6cc3433b9be7a6b48b3acf1_tn" />
           </div>
           <div className="account-item">
-            <div className="account-name">
-              Pham QUynh huong Pham QUynh huong Pham QUynh huong Pham QUynh
-              huong
-            </div>
+            <div className="account-name">{user.HoTen}</div>
             <Link to="/myaccount">
               <div className="account-modify">Sửa hồ sơ</div>
             </Link>
@@ -35,7 +34,7 @@ const AccountSideBar = () => {
             </Link>
           </div>
           <div className="sidebar-list-item">
-            <Link to="/myaccount">
+            <Link to="/changepassword">
               <FontAwesomeIcon icon={faKey} className="icon" />
               Đổi mật khẩu
             </Link>

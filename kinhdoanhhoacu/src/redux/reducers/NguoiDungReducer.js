@@ -5,6 +5,12 @@ import {
   SIGNIN_FAIL,
 } from "../actions/signinAction";
 
+import {
+  MODIFY_NGUOIDUNG_SUCCESS,
+  MODIFY_NGUOIDUNG_FAIL,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAIL,
+} from "../actions/accountAction";
 const intialState = {
   nguoidungList: [],
   nguoidung: {},
@@ -36,6 +42,26 @@ export const NguoiDungReducer = (state = intialState, action) => {
         nguoidung: action.payload,
       };
     case SIGNIN_FAIL:
+      return {
+        ...state,
+        error: action.payload.error,
+      };
+    case MODIFY_NGUOIDUNG_SUCCESS:
+      return {
+        ...state,
+        nguoidung: action.payload,
+      };
+    case MODIFY_NGUOIDUNG_FAIL:
+      return {
+        ...state,
+        error: action.payload.error,
+      };
+    case CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        nguoidung: action.payload,
+      };
+    case CHANGE_PASSWORD_FAIL:
       return {
         ...state,
         error: action.payload.error,
