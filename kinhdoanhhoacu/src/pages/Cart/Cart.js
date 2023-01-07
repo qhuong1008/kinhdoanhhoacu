@@ -3,14 +3,33 @@ import Header from "../../components/Header";
 import BreadcrumbComponent from "../../components/BreadcrumbComponent";
 import style from "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { getCart } from "../../redux/actions/cartAction";
+import { getCart, DeleteFromCart } from "../../redux/actions/cartAction";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
+import { CartApi } from "../../api/index";
+import { Link } from "react-router-dom";
 
 function Cart() {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
+  let cart = useSelector((state) => state.cart.cart);
   const isLoading = useSelector((state) => state.cart.loading);
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user);
+
+  const handleDeleteFromCart = (MaSP) => {
+    let cartItem = {
+      maNguoiDung: "",
+      maSP: "",
+    };
+    cartItem.maNguoiDung = user.MaNguoiDung;
+    cartItem.maSP = MaSP;
+
+    var message = "Xoá sản phẩm " + cartItem.maSP + " khỏi giỏ hàng?";
+    if (window.confirm(message) == true) {
+      CartApi.DeleteFromCart(cartItem);
+      alert("Xóa thành công!");
+    }
+  };
 
   useEffect(() => {
     dispatch(getCart());
@@ -36,7 +55,7 @@ function Cart() {
             <tbody>
               {cart.map((cartItem) => {
                 return (
-                  <tr>
+                  <tr key={cartItem.MaSP}>
                     <td>
                       <img src={cartItem.Hinh} alt="" />
                     </td>
@@ -45,15 +64,16 @@ function Cart() {
                     <td>{cartItem.TongPhu}</td>
                     <td>
                       <span>
-                        <a
+                        <button
                           href=""
                           data-toggle="tooltip"
                           data-placement="top"
                           title="Delete"
+                          onClick={() => handleDeleteFromCart(cartItem.MaSP)}
                         >
                           Delete
                           <i class="fa fa-close color-danger"></i>
-                        </a>
+                        </button>
                       </span>
                     </td>
                   </tr>
@@ -61,7 +81,9 @@ function Cart() {
               })}
             </tbody>
           </table>
-          <div className="thanhtoan-btn">Thanh toán</div>
+          <Link to="/checkout">
+            <div className="thanhtoan-btn">Thanh toán</div>
+          </Link>
         </div>
       )}
       <Footer />

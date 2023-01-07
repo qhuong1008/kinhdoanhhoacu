@@ -8,4 +8,7 @@ const GetCartInfo = async () => {
   user = JSON.parse(user);
   return await axiosInstance.get(`/api/cart/cart_${user.MaNguoiDung}`);
 };
-export { AddToCart, GetCartInfo };
+const DeleteFromCart = async (cart) => {
+  return await axiosInstance.delete("/api/delete/cart", cart);
+};
+export { AddToCart, GetCartInfo, DeleteFromCart };

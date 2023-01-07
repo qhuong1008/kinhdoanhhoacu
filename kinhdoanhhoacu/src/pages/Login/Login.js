@@ -32,7 +32,6 @@ const Login = () => {
         alert("User not exist!");
       } else {
         window.location.href = `/homepage`;
-        alert("Login thành công!");
       }
     }
   };

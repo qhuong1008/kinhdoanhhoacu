@@ -241,3 +241,61 @@
   grid-template-columns: repeat(9, 1fr);
   grid-gap: 2px;
 }
+
+// Account Side Bar
+.sidebar-container {
+  display: block;
+  width: 200px;
+  background-color: white;
+  height: 800px;
+  margin-right: 10px;
+}
+.account-container {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 10px;
+  font-size: 14px;
+  align-items: center;
+}
+.account-item {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+}
+.account-avt {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: fill;
+  }
+}
+.account-name {
+  white-space: nowrap;
+  width: 115px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebar-list {
+}
+.sidebar-list-item {
+  text-transform: capitalize;
+  font-size: 14px;
+  padding: 10px 10px;
+  transition: all 0.3s ease 0s;
+  .icon {
+    margin-right: 5px;
+  }
+  &:hover {
+    a {
+      color: $primary-color;
+    }
+    color: $primary-color;
+    cursor: pointer;
+    background-color: #fcdde2;
+  }
+}

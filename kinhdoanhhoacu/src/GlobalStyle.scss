@@ -52,3 +52,10 @@ a:hover {
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
 }
+.ruler {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background-color: $light-grey;
+  margin: 10px 0;
+}

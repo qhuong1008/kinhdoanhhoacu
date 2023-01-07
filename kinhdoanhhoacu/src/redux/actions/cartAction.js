@@ -7,6 +7,9 @@ export const GET_CART_FAIL = "GET_CART_FAIL";
 export const ADD_TO_CART_SUCCESS = "ADD_TO_CART_SUCCESS";
 export const ADD_TO_CART_FAIL = "ADD_TO_CART_SUCCESS";
 
+export const DELETE_FROM_CART_SUCCESS = "DELETE_FROM_CART_SUCCESS";
+export const DELETE_FROM_CART_FAIL = "DELETE_FROM_CART_FAIL";
+
 export const getCart = () => async (dispatch) => {
   dispatch({
     type: GET_CART_BEGIN,
@@ -37,6 +40,22 @@ export const AddToCart = (cart) => async (dispatch) => {
     .catch((error) => {
       dispatch({
         type: ADD_TO_CART_FAIL,
+        payload: error,
+      });
+    });
+};
+
+export const DeleteFromCart = (cart) => async (dispatch) => {
+  CartApi.DeleteFromCart(cart)
+    .then((response) => {
+      dispatch({
+        type: DELETE_FROM_CART_SUCCESS,
+        payload: response.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: DELETE_FROM_CART_FAIL,
         payload: error,
       });
     });

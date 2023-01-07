@@ -4,6 +4,8 @@ import {
   GET_CART_FAIL,
   ADD_TO_CART_SUCCESS,
   ADD_TO_CART_FAIL,
+  DELETE_FROM_CART_SUCCESS,
+  DELETE_FROM_CART_FAIL,
 } from "../actions/cartAction";
 
 const initialState = {
@@ -36,6 +38,16 @@ export const CartReducer = (state = initialState, action) => {
         cart: action.payload,
       };
     case ADD_TO_CART_FAIL:
+      return {
+        ...state,
+        error: action.payload.error,
+      };
+    case DELETE_FROM_CART_SUCCESS:
+      return {
+        ...state,
+        cart: action.payload,
+      };
+    case DELETE_FROM_CART_FAIL:
       return {
         ...state,
         error: action.payload.error,

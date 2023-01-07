@@ -20,6 +20,13 @@ function Header() {
   const handleLogout = () => {
     localStorage.removeItem("user");
   };
+  const handleLogin = () => {
+    let user = localStorage.getItem("user");
+    user = JSON.parse(user);
+    if (user == null) {
+      window.location.href = `/login`;
+    }
+  };
   return (
     <>
       <div className="top-header">
@@ -43,7 +50,7 @@ function Header() {
             <FontAwesomeIcon icon={faDollarSign} className="icon" />
             VND
           </div>
-          <div className="top-header-item">
+          <div className="top-header-item" onClick={handleLogin}>
             <FontAwesomeIcon icon={faUser} className="icon" />
             My Accounts
           </div>
@@ -71,16 +78,26 @@ function Header() {
           </div>
           <Link to="/cart">
             <div className="header-menu-item">
-              <FontAwesomeIcon icon={faCartShopping} className="icon" />
+              <FontAwesomeIcon
+                icon={faCartShopping}
+                onClick={handleLogin}
+                className="icon"
+              />
               <div className="amount">2</div>
               Giỏ hàng
             </div>
           </Link>
-          <div className="header-menu-item">
-            <FontAwesomeIcon icon={faBox} className="icon" />
-            <div className="amount">2</div>
-            Đơn hàng
-          </div>
+          <Link to="/orders">
+            <div className="header-menu-item">
+              <FontAwesomeIcon
+                icon={faBox}
+                className="icon"
+                onClick={handleLogin}
+              />
+              <div className="amount">2</div>
+              Đơn hàng
+            </div>
+          </Link>
         </div>
       </div>
       <div className="header-red"></div>

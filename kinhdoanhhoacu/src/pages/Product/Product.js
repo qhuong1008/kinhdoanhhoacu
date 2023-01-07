@@ -22,25 +22,27 @@ function Product() {
   const dispatch = useDispatch();
 
   const sanpham = useSelector((state) => state.product.product);
-  console.log("sanpham:", sanpham);
   const isLoading = useSelector((state) => state.product.loading);
-
   const [soLuong, setSoLuong] = useState(1);
 
   let user = localStorage.getItem("user");
   user = JSON.parse(user);
-  let cart = {
-    maNguoiDung: "",
-    maSP: "",
-    soLuong: 1,
-  };
-  cart.maNguoiDung = user.MaNguoiDung;
-  cart.maSP = sanpham.MaSP;
-  cart.soLuong = soLuong;
 
   const handleAddToCart = () => {
+    if (user == null) {
+      window.location.href = `/login`;
+    }
+    let cart = {
+      maNguoiDung: "",
+      maSP: "",
+      soLuong: 1,
+    };
+    cart.maNguoiDung = user.MaNguoiDung;
+    cart.maSP = sanpham.MaSP;
+    cart.soLuong = soLuong;
     var message = "Thêm sản phẩm " + sanpham.MaSP + " vào giỏ hàng?";
     if (window.confirm(message) == true) {
+      console.log(cart);
       dispatch(AddToCart(cart));
       alert("Thêm vào giỏ thành công!");
     }
