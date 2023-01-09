@@ -14,13 +14,21 @@ const ChangePassword = () => {
   const [retypePassword, setRetypePassword] = useState("");
 
   const handleChangePassword = () => {
-    const modifiedUser = {};
-    modifiedUser.MaNguoiDung = user.MaNguoiDung;
-    modifiedUser.MatKhau = password;
-    console.log(modifiedUser);
-    dispatch(changePassword(modifiedUser))
-      .then(alert("Đổi mật khẩu thành công!"))
-      .catch((error) => alert(error));
+    if (password == "" || retypePassword == "") {
+      alert("Vui lòng nhập đủ thông tin!");
+    } else {
+      if (password != retypePassword) {
+        alert("Mật khẩu nhập lại không khớp!");
+      } else {
+        const modifiedUser = {};
+        modifiedUser.MaNguoiDung = user.MaNguoiDung;
+        modifiedUser.MatKhau = retypePassword;
+        console.log(modifiedUser);
+        dispatch(changePassword(modifiedUser))
+          .then(alert("Đổi mật khẩu thành công!"))
+          .catch((error) => alert(error));
+      }
+    }
   };
   return (
     <>

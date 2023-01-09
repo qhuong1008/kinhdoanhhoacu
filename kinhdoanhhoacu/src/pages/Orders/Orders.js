@@ -1,18 +1,63 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import AccountSideBar from "../../components/AccountSideBar";
+import Loading from "../../components/Loading";
 import style from "./style.scss";
 import $ from "jquery";
 import { useEffect, useState } from "react";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShippingFast } from "@fortawesome/free-solid-svg-icons";
+import Button from "../../components/Button";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  faCartShopping,
-  faHeart,
-  faTwitter,
-} from "@fortawesome/free-solid-svg-icons";
+  getAllHoaDon,
+  getAllProductsFromHoaDon,
+} from "../../redux/actions/hoadonAction";
+import { HoaDonApi } from "../../api/index";
 
 const Orders = () => {
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user);
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.hoadon.loading);
+  let donhanglist = useSelector((state) => state.hoadon.donhanglist);
+
+  let hoadonlist = [];
+  // lọc ra đơn hàng có cùng mã hóa đơn
+  const LocDonHang = () => {
+    donhanglist.forEach((donhang) => {
+      let array = donhanglist.filter(
+        (item) => item.MaHoaDon === donhang.MaHoaDon
+      );
+      hoadonlist.push(array);
+    });
+
+    let arrayIndex = [];
+    hoadonlist.forEach((hoadon, index) => {
+      arrayIndex[index] = hoadon[0].MaHoaDon;
+    });
+
+    arrayIndex = [...new Set(arrayIndex)];
+    let newhoadonlist = [];
+    arrayIndex.forEach((mahoadon) => {
+      let array = hoadonlist.filter((hoadon) => mahoadon == hoadon[0].MaHoaDon);
+      newhoadonlist.push(array);
+    });
+    hoadonlist = newhoadonlist;
+    donhanglist = [];
+    hoadonlist.forEach((hoadonArray) => {
+      donhanglist.push(hoadonArray[0]);
+    });
+  };
+
+  if (!isLoading) {
+    LocDonHang();
+  }
+  useEffect(() => {
+    dispatch(getAllProductsFromHoaDon(user.MaNguoiDung));
+  }, []);
+
   return (
     <>
       <Header />
@@ -31,56 +76,57 @@ const Orders = () => {
           <div className="order-filter-input">
             <input placeholder="Tìm đơn hàng theo mã đơn hàng hoặc tên sản phẩm" />
           </div>
-          <div className="order-list">
-            <div className="order-item">
-              <div className="order-product-img">
-                <img src="https://bucket.nhanh.vn/store/15668/ps/20211124/tui_cheo_ban_to_4.jpg" />
-              </div>
-              <div className="order-product-title">
-                <div>Túi đeo chéo bản to màu đen</div>
-                <div className="order-product-type">
-                  Phân loại hàng: dụng cụ
+
+          {donhanglist.map((donhang) => {
+            console.log(donhang);
+            return [
+              <div className="order-list">
+                <div className="order-product-status">
+                  <FontAwesomeIcon icon={faShippingFast} className="icon" />
+                  <label>Giao hàng thành công</label>
                 </div>
-              </div>
-            </div>
-            <div className="ruler"></div>
-            <div className="order-item">
-              <div className="order-product-img">
-                <img src="https://bucket.nhanh.vn/store/15668/ps/20211124/tui_cheo_ban_to_4.jpg" />
-              </div>
-              <div className="order-product-title">
-                <div>Túi đeo chéo bản to màu đen</div>
-                <div className="order-product-type">
-                  Phân loại hàng: dụng cụ
+                <div className="ruler"></div>
+                <div className="order-item">
+                  {donhang.map((sanpham) => {
+                    return (
+                      <>
+                        <div className="order-product">
+                          <div className="order-product-info">
+                            <div className="order-product-img">
+                              <img src={sanpham.Hinh} />
+                            </div>
+                            <div className="order-product-title">
+                              <div className="order-product-name">
+                                {sanpham.TenSP}
+                              </div>
+                              <div className="order-product-type">
+                                {sanpham.TenLoaiSP}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="order-product-price">
+                            {sanpham.TongPhu} ₫
+                          </div>
+                        </div>
+                        <div className="ruler"></div>
+                      </>
+                    );
+                  })}
                 </div>
-              </div>
-            </div>
-            <div className="ruler"></div>
-            <div className="order-item">
-              <div className="order-product-img">
-                <img src="https://bucket.nhanh.vn/store/15668/ps/20211124/tui_cheo_ban_to_4.jpg" />
-              </div>
-              <div className="order-product-title">
-                <div>Túi đeo chéo bản to màu đen</div>
-                <div className="order-product-type">
-                  Phân loại hàng: dụng cụ
+
+                <div className="order-product-total">
+                  Tổng tiền:
+                  <label>{donhang[0].TongThanhToan} ₫</label>
                 </div>
-              </div>
-            </div>
-            <div className="ruler"></div>
-            <div className="order-item">
-              <div className="order-product-img">
-                <img src="https://bucket.nhanh.vn/store/15668/ps/20211124/tui_cheo_ban_to_4.jpg" />
-              </div>
-              <div className="order-product-title">
-                <div>Túi đeo chéo bản to màu đen</div>
-                <div className="order-product-type">
-                  Phân loại hàng: dụng cụ
+
+                <div className="order-button-options">
+                  <Button children="Mua lại"></Button>
+                  <Button children="Liên hệ người bán"></Button>
+                  <Button children="Xem đánh giá shop"></Button>
                 </div>
-              </div>
-            </div>
-            <div className="ruler"></div>
-          </div>
+              </div>,
+            ];
+          })}
         </div>
       </div>
       <Footer />

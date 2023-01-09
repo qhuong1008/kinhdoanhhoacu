@@ -299,3 +299,15 @@
     background-color: #fcdde2;
   }
 }
+.button-container {
+  display: block;
+  padding: 7px 12px;
+  margin: 5px 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: $primary-color;
+  text-align: center;
+  cursor: pointer;
+  width: fit-content;
+  font-size: 14px;
+}

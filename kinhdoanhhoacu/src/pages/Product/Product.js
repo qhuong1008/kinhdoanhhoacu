@@ -11,7 +11,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { SanPhamApi } from "../../api";
 import Loading from "../../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../redux/actions/productsActions";

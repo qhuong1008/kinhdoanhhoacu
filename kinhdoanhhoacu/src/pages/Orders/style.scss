@@ -7,6 +7,10 @@
 .order-content {
   width: 100%;
   padding: 20px 20px;
+  .ruler {
+    color: $light-grey !important;
+    height: 1px;
+  }
 }
 .order-filter-list {
   background-color: white;
@@ -44,15 +48,22 @@
 }
 .order-item {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  .order-product {
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 .order-product-title {
   margin-left: 10px;
 }
+.order-product-name {
+  font-size: 15px;
+  font-weight: 500;
+}
 .order-product-type {
-  color: $light-black;
-  font-size: 13px;
+  color: $light-black !important;
+  font-size: 13px !important;
 }
 .order-product-img {
   width: 80px;
@@ -61,4 +72,36 @@
     width: 100%;
     height: 100%;
   }
+}
+.order-product-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.order-product-price {
+  color: $primary-color;
+  font-weight: 500;
+  font-size: 14px;
+}
+.order-product-status {
+  font-size: 13px;
+  font-weight: 500;
+  color: $font-dark-grey;
+  label {
+    margin-left: 10px;
+  }
+}
+.order-product-total {
+  text-align: right;
+  label {
+    margin-left: 10px;
+    color: $primary-color;
+    font-size: 17px;
+    font-weight: 500;
+  }
+}
+.order-button-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
 }
