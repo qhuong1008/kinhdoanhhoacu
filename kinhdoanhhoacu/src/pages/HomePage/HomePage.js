@@ -5,57 +5,62 @@ import $ from "jquery";
 import { useEffect, useState } from "react";
 import { SanPhamApi } from "../../api/index";
 import ProductItem from "../../components/ProductItem";
+import { PaginationControl } from "react-bootstrap-pagination-control";
 import Loading from "../../components/Loading";
-import Pagination from "@mui/material/Pagination";
-import Paginate from "../../components/Paginate";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../redux/actions/productsActions";
+import {
+  getAllProducts,
+  getAllProductType,
+} from "../../redux/actions/productsActions";
+import { productsRemainingSelector } from "../../redux/selectors";
+import { allProductTypeSelector } from "../../redux/selectors";
 
 const HomePage = () => {
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [sanphamlist, setSanphamlist] = useState([]);
-  // const [currentSanPhamList, setCurrentSanPhamList] = useState([]);
-  // const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
-  // const ProductPerPage = 9;
-
-  // const paginate = (page) => {
-  //   setIsLoading(true);
-  //   setPage(page);
-  //   loadAllSanPham();
-  // };
-  // const loadAllSanPham = () => {
-  //   const indexOfLastProduct = page * ProductPerPage;
-  //   const indexOfFirstProduct = indexOfLastProduct - ProductPerPage;
-  //   SanPhamApi.getSanPham()
-  //     .then((response) => {
-  //       setSanphamlist(response.data);
-  //       setCurrentSanPhamList(
-  //         response.data.slice(indexOfFirstProduct, indexOfLastProduct)
-  //       );
-  //     })
-
-  //     .then(() => setIsLoading(false))
-  //     .catch((error) => {});
-  // };
-
-  const handleCheckbox = () => {
-    let isChecked = $(".checkbox").is(":checked");
-    $(".checkbox").each(() => {
-      if (isChecked == false) {
-        $(".checkbox").prop("checked", true);
-      } else {
-        $(".checkbox").prop("checked", false);
-      }
-    });
-  };
-  const sanPhamList = useSelector((state) => state.allProducts.products);
+  let initialsanPhamList = useSelector(productsRemainingSelector);
+  let sanPhamList = [];
+  // let sanPhamList = useSelector(productsRemainingSelector);
+  const allProductTypes = useSelector(allProductTypeSelector);
   const isLoading = useSelector((state) => state.allProducts.loading);
+
+  let [checkedState, setCheckedState] = useState(
+    Array(allProductTypes.length).fill(false)
+  );
+
+  const handleCheckbox = (currentIndex) => {
+    let updateCheckState = checkedState.map((item, index) =>
+      index === currentIndex ? !item : item
+    );
+    setCheckedState(updateCheckState);
+  };
+
+  // Handle Pagination
+  // let currentSanPhamList = [];
+  const [page, setPage] = useState(1);
+  const ProductPerPage = 9;
+
+  function setProductsByPagination() {
+    const indexOfLastProduct = page * ProductPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - ProductPerPage;
+    sanPhamList = initialsanPhamList.slice(
+      indexOfFirstProduct,
+      indexOfLastProduct
+    );
+  }
+
+  if (!isLoading) {
+    setProductsByPagination();
+  }
+
   useEffect(() => {
     dispatch(getAllProducts());
+    dispatch(getAllProductType());
   }, []);
 
+  useEffect(() => {
+    setProductsByPagination();
+  }, [page]);
   return (
     <>
       <Header />
@@ -64,30 +69,22 @@ const HomePage = () => {
           <div className="aside-item">
             <div className="aside-title">CATEGORIES</div>
             <div className="checkbox-filter">
-              <div className="checkbox-filter-item" onClick={handleCheckbox}>
-                <input type="checkbox" className="checkbox" />
-                Màu vẽ
-              </div>
-              <div className="checkbox-filter-item" onClick={handleCheckbox}>
-                <input type="checkbox" className="checkbox" />
-                Giấy vẽ
-              </div>
-              <div className="checkbox-filter-item" onClick={handleCheckbox}>
-                <input type="checkbox" className="checkbox" />
-                Bút vẽ
-              </div>
-              <div className="checkbox-filter-item" onClick={handleCheckbox}>
-                <input type="checkbox" className="checkbox" />
-                Phác thảo
-              </div>
-              <div className="checkbox-filter-item" onClick={handleCheckbox}>
-                <input type="checkbox" className="checkbox" />
-                Dụng cụ bổ trợ
-              </div>
-              <div className="checkbox-filter-item" onClick={handleCheckbox}>
-                <input type="checkbox" className="checkbox" />
-                Văn phòng phẩm
-              </div>
+              {allProductTypes.map((type, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="checkbox-filter-item"
+                    onClick={() => handleCheckbox(index)}
+                  >
+                    <input
+                      type="checkbox"
+                      className="checkbox"
+                      checked={checkedState[index]}
+                    />
+                    {type.TenLoaiSanPham}
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="aside-item">
@@ -170,6 +167,18 @@ const HomePage = () => {
         tongSP={sanphamlist.length}
         paginate={paginate}
       /> */}
+      <PaginationControl
+        className="pagination"
+        page={page}
+        between={4}
+        total={initialsanPhamList.length}
+        limit={ProductPerPage}
+        changePage={(page) => {
+          setPage(page);
+          console.log(page);
+        }}
+        ellipsis={1}
+      />
       <Footer />
       {/* <Loading /> */}
     </>

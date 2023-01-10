@@ -122,3 +122,11 @@
     padding-bottom: 15px;
   }
 }
+.active > .page-link {
+  background-color: $light-primary-color !important;
+  border-color: $light-primary-color !important;
+  color: white !important;
+}
+.pagination .page-item .page-link {
+  color: $primary-color !important;
+}

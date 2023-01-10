@@ -2,14 +2,20 @@ import {
   GET_ALL_PRODUCTS_BEGIN,
   GET_ALL_PRODUCTS_SUCCESS,
   GET_ALL_PRODUCTS_FAIL,
+  GET_ALL_PRODUCT_TYPE_BEGIN,
+  GET_ALL_PRODUCT_TYPE_SUCCESS,
+  GET_ALL_PRODUCT_TYPE_FAIL,
   GET_PRODUCT_BEGIN,
   GET_PRODUCT_SUCCESS,
   GET_PRODUCT_FAIL,
+  FILTER_PRODUCT_TYPE,
 } from "../actions/productsActions";
 
 const intialState = {
   products: [],
+  productTypes: [],
   product: {},
+  productFilter: "",
   loading: false,
   error: null,
 };
@@ -32,6 +38,28 @@ export const productsReducer = (state = intialState, action) => {
         ...state,
         loading: false,
         error: action.payload.error,
+      };
+    case GET_ALL_PRODUCT_TYPE_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_ALL_PRODUCT_TYPE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        productTypes: action.payload,
+      };
+    case GET_ALL_PRODUCT_TYPE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      };
+    case FILTER_PRODUCT_TYPE:
+      return {
+        ...state,
+        productFilter: action.payload,
       };
     default:
       return state;

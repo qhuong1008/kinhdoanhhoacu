@@ -49,11 +49,11 @@ export const getAllHoaDon = (userID) => async (dispatch) => {
     });
 };
 
-export const getAllProductsFromHoaDon = (orderID) => async (dispatch) => {
+export const getAllProductsFromHoaDon = (userID) => async (dispatch) => {
   dispatch({
     type: GET_PRODUCTS_FROM_HOADON_BEGIN,
   });
-  HoaDonApi.getAllProductsFromHoaDon(orderID)
+  HoaDonApi.getAllProductsFromHoaDon(userID)
     .then((response) => {
       dispatch({
         type: GET_PRODUCTS_FROM_HOADON_SUCCESS,

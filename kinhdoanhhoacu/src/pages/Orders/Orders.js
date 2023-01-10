@@ -51,9 +51,8 @@ const Orders = () => {
     });
   };
 
-  if (!isLoading) {
-    LocDonHang();
-  }
+  LocDonHang();
+
   useEffect(() => {
     dispatch(getAllProductsFromHoaDon(user.MaNguoiDung));
   }, []);

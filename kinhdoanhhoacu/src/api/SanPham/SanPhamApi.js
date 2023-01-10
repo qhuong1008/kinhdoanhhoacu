@@ -5,7 +5,10 @@ const getSanPham = async () => {
 const getSanPhamById = async (productId) => {
   return await axiosInstance.get(`/api/sanpham/${productId}`);
 };
+const getLoaiSanPham = async () => {
+  return await axiosInstance.get("/api/loaisanpham");
+};
 const getTenLoaiSanPhamBySPId = async (productId) => {
   return await axiosInstance.get(`/api/sanpham/lsp/${productId}`);
 };
-export { getSanPham, getSanPhamById, getTenLoaiSanPhamBySPId };
+export { getSanPham, getSanPhamById, getTenLoaiSanPhamBySPId, getLoaiSanPham };

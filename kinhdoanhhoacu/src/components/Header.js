@@ -15,8 +15,19 @@ import {
   faRightFromBracket,
   faBox,
 } from "@fortawesome/free-solid-svg-icons";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { allProductTypeSelector } from "../redux/selectors";
+import {
+  getAllProductType,
+  ProductTypeFilterChange,
+} from "../redux/actions/productsActions";
 
 function Header() {
+  const [productType, setProductType] = useState("");
+  const dispatch = useDispatch();
+  const allProductTypes = useSelector(allProductTypeSelector);
+  const isLoading = useSelector((state) => state.allProducts.loading);
   const handleLogout = () => {
     localStorage.removeItem("user");
   };
@@ -27,6 +38,14 @@ function Header() {
       window.location.href = `/login`;
     }
   };
+
+  const handleFilterProducts = (maLsp) => {
+    setProductType(maLsp);
+    dispatch(ProductTypeFilterChange(maLsp));
+  };
+  useEffect(() => {
+    dispatch(getAllProductType());
+  }, []);
   return (
     <>
       <div className="top-header">
@@ -103,27 +122,18 @@ function Header() {
       <div className="header-red"></div>
       <div className="navigation">
         <ul className="nav-list">
-          <li className="nav-item">
-            Trang chủ
-            <div className="underline"></div>
-          </li>
-          <li className="nav-item">
-            Màu vẽ <div className="underline"></div>
-          </li>
-          <li className="nav-item">
-            Giấy vẽ <div className="underline"></div>
-          </li>
-          <li className="nav-item">
-            Phác thảo <div className="underline"></div>
-          </li>
-          <li className="nav-item">
-            Dụng cụ bổ trợ
-            <div className="underline"></div>
-          </li>
-          <li className="nav-item">
-            Văn phòng phẩm
-            <div className="underline"></div>
-          </li>
+          {allProductTypes.map((type) => {
+            return (
+              <Link to="/homepage">
+                <li
+                  className="nav-item"
+                  onClick={() => handleFilterProducts(type.MaLoaiSP)}
+                >
+                  {type.TenLoaiSanPham} <div className="underline"></div>
+                </li>
+              </Link>
+            );
+          })}
         </ul>
       </div>
     </>
