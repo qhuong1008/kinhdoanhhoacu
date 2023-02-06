@@ -47,6 +47,9 @@ export const AddToCart = (cart) => async (dispatch) => {
 
 export const DeleteFromCart = (cart) => async (dispatch) => {
   CartApi.DeleteFromCart(cart)
+    .then(() => {
+      getCart();
+    })
     .then((response) => {
       dispatch({
         type: DELETE_FROM_CART_SUCCESS,

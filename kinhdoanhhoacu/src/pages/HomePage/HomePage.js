@@ -11,32 +11,48 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllProducts,
   getAllProductType,
+  getListTypeCheckBox,
+  updateProductTypeCheckBox,
+  TypeListFilterChange,
 } from "../../redux/actions/productsActions";
 import { productsRemainingSelector } from "../../redux/selectors";
-import { allProductTypeSelector } from "../../redux/selectors";
+import {
+  allProductTypeSelector,
+  filterTypeListIndexSelector,
+  userSelector,
+} from "../../redux/selectors";
 
 const HomePage = () => {
+  const filterTypeListIndex = useSelector(filterTypeListIndexSelector);
   const dispatch = useDispatch();
-
-  let initialsanPhamList = useSelector(productsRemainingSelector);
+  const nguoidung = useSelector(userSelector);
+  console.log(nguoidung);
+  let zinitialsanPhamList = useSelector(productsRemainingSelector);
+  let initialsanPhamList = zinitialsanPhamList.filter((sp) => {
+    return sp.DaXoa === false;
+  });
   let sanPhamList = [];
-  // let sanPhamList = useSelector(productsRemainingSelector);
-  const allProductTypes = useSelector(allProductTypeSelector);
+  const zallProductTypes = useSelector(allProductTypeSelector);
+  let allProductTypes = zallProductTypes.filter((type) => {
+    return type.DaXoa === false;
+  });
   const isLoading = useSelector((state) => state.allProducts.loading);
-
-  let [checkedState, setCheckedState] = useState(
-    Array(allProductTypes.length).fill(false)
-  );
-
-  const handleCheckbox = (currentIndex) => {
-    let updateCheckState = checkedState.map((item, index) =>
-      index === currentIndex ? !item : item
-    );
-    setCheckedState(updateCheckState);
+  const [index, setIndex] = useState(-1);
+  let filterTypeList = [];
+  const [lspList, setLspList] = useState([]);
+  const handleCheckbox = (e) => {
+    // filterTypeList[currentIndex] = !filterTypeList[currentIndex];
+    let value = e.target.value;
+    if (e.target.checked) {
+      setLspList([...lspList, e.target.value]);
+    } else {
+      setLspList(lspList.filter((e) => e !== value));
+    }
+    dispatch(TypeListFilterChange(lspList));
+    console.log(lspList);
   };
 
   // Handle Pagination
-  // let currentSanPhamList = [];
   const [page, setPage] = useState(1);
   const ProductPerPage = 9;
 
@@ -48,9 +64,15 @@ const HomePage = () => {
       indexOfLastProduct
     );
   }
+  function getFilterTypeList() {
+    for (let i = 0; i < allProductTypes.length; i++) {
+      filterTypeList.push(false);
+    }
+  }
 
   if (!isLoading) {
     setProductsByPagination();
+    getFilterTypeList();
   }
 
   useEffect(() => {
@@ -71,15 +93,13 @@ const HomePage = () => {
             <div className="checkbox-filter">
               {allProductTypes.map((type, index) => {
                 return (
-                  <div
-                    key={index}
-                    className="checkbox-filter-item"
-                    onClick={() => handleCheckbox(index)}
-                  >
+                  <div key={index} className="checkbox-filter-item">
                     <input
                       type="checkbox"
                       className="checkbox"
-                      checked={checkedState[index]}
+                      value={type.MaLoaiSP}
+                      // checked={filterTypeList[index]}
+                      onChange={(e) => handleCheckbox(e)}
                     />
                     {type.TenLoaiSanPham}
                   </div>

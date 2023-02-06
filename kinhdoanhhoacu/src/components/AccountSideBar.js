@@ -17,7 +17,7 @@ const AccountSideBar = () => {
       <div className="sidebar-container">
         <div className="account-container">
           <div className="account-avt">
-            <img src="https://cf.shopee.vn/file/7e03f703b6cc3433b9be7a6b48b3acf1_tn" />
+            <img src={user.Hinh} />
           </div>
           <div className="account-item">
             <div className="account-name">{user.HoTen}</div>

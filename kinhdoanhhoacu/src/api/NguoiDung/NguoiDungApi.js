@@ -8,8 +8,30 @@ const getNguoiDungById = async (id) => {
 const modifyNguoiDung = async (user) => {
   return await axiosInstance.post("/api/nguoidung", user);
 };
+const addNguoiDung = async (user) => {
+  return await axiosInstance.post("/api/nguoidung/add", user);
+};
 const changePassword = async (user) => {
   return await axiosInstance.post("/api/nguoidung/changepw", user);
 };
 
-export { getAllNguoiDung, getNguoiDungById, modifyNguoiDung, changePassword };
+const login = async (loginInfo) => {
+  return await axiosInstance.post("/api/nguoidung/login", loginInfo);
+};
+const logout = async (token) => {
+  return await axiosInstance.post("/api/nguoidung/login", token);
+};
+const refresh = async (token) => {
+  return await axiosInstance.post("/api/nguoidung/refresh", token);
+};
+
+export {
+  getAllNguoiDung,
+  getNguoiDungById,
+  modifyNguoiDung,
+  addNguoiDung,
+  changePassword,
+  login,
+  logout,
+  refresh,
+};

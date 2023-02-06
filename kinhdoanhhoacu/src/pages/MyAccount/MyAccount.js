@@ -7,10 +7,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, DeleteFromCart } from "../../redux/actions/cartAction";
 import { modifyNguoiDung } from "../../redux/actions/accountAction";
-import {
-  getAllNguoiDung,
-  getNguoiDungById,
-} from "../../redux/actions/signinAction";
 
 const MyAccount = () => {
   let user = localStorage.getItem("user");

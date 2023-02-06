@@ -1,3 +1,4 @@
+import { createBreakpoints } from "@mui/system";
 import { axiosInstance } from "../types/axios";
 
 const AddToCart = async (cart) => {
@@ -9,6 +10,6 @@ const GetCartInfo = async () => {
   return await axiosInstance.get(`/api/cart/cart_${user.MaNguoiDung}`);
 };
 const DeleteFromCart = async (cart) => {
-  return await axiosInstance.delete("/api/delete/cart", cart);
+  return await axiosInstance.post("/api/delete/cart", cart);
 };
 export { AddToCart, GetCartInfo, DeleteFromCart };

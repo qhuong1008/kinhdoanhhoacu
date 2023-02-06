@@ -1,47 +1,27 @@
-import {
-  GET_ALL_NGUOIDUNG_SUCCESS,
-  GET_ALL_NGUOIDUNG_FAIL,
-  SIGNIN_SUCCESS,
-  SIGNIN_FAIL,
-} from "../actions/signinAction";
-
+import { LOGIN_SUCCESS, LOGIN_FAIL } from "../actions/authAction";
 import {
   MODIFY_NGUOIDUNG_SUCCESS,
   MODIFY_NGUOIDUNG_FAIL,
   CHANGE_PASSWORD_SUCCESS,
   CHANGE_PASSWORD_FAIL,
+  SIGN_IN_SUCCESS,
+  SIGN_IN_FAIL,
 } from "../actions/accountAction";
 const intialState = {
   nguoidungList: [],
   nguoidung: {},
+  account: {},
   error: null,
-};
-
-export const AllNguoiDungReducer = (state = intialState, action) => {
-  switch (action.type) {
-    case GET_ALL_NGUOIDUNG_SUCCESS:
-      return {
-        ...state,
-        nguoidungList: action.payload,
-      };
-    case GET_ALL_NGUOIDUNG_FAIL:
-      return {
-        ...state,
-        error: action.payload.error,
-      };
-    default:
-      return state;
-  }
 };
 
 export const NguoiDungReducer = (state = intialState, action) => {
   switch (action.type) {
-    case SIGNIN_SUCCESS:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         nguoidung: action.payload,
       };
-    case SIGNIN_FAIL:
+    case LOGIN_FAIL:
       return {
         ...state,
         error: action.payload.error,
@@ -52,6 +32,15 @@ export const NguoiDungReducer = (state = intialState, action) => {
         nguoidung: action.payload,
       };
     case MODIFY_NGUOIDUNG_FAIL:
+      return {
+        ...state,
+        error: action.payload.error,
+      };
+    case SIGN_IN_SUCCESS:
+      return {
+        ...state,
+      };
+    case SIGN_IN_FAIL:
       return {
         ...state,
         error: action.payload.error,

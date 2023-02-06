@@ -9,6 +9,9 @@ import {
   GET_PRODUCT_SUCCESS,
   GET_PRODUCT_FAIL,
   FILTER_PRODUCT_TYPE,
+  FILTER_LIST_PRODUCT_TYPE,
+  FILTER_LIST_PRODUCT_TYPE_CHANGE,
+  SEARCH_FILTER,
 } from "../actions/productsActions";
 
 const intialState = {
@@ -16,6 +19,8 @@ const intialState = {
   productTypes: [],
   product: {},
   productFilter: "",
+  listTypeFilter: [],
+  searchFilter: "",
   loading: false,
   error: null,
 };
@@ -60,6 +65,21 @@ export const productsReducer = (state = intialState, action) => {
       return {
         ...state,
         productFilter: action.payload,
+      };
+    case FILTER_LIST_PRODUCT_TYPE:
+      return {
+        ...state,
+        listTypeFilter: action.payload,
+      };
+    case FILTER_LIST_PRODUCT_TYPE_CHANGE:
+      return {
+        ...state,
+        listTypeFilter: action.payload,
+      };
+    case SEARCH_FILTER:
+      return {
+        ...state,
+        searchFilter: action.payload,
       };
     default:
       return state;

@@ -21,31 +21,49 @@ import { allProductTypeSelector } from "../redux/selectors";
 import {
   getAllProductType,
   ProductTypeFilterChange,
+  SearchFilterChange,
 } from "../redux/actions/productsActions";
 
 function Header() {
-  const [productType, setProductType] = useState("");
   const dispatch = useDispatch();
-  const allProductTypes = useSelector(allProductTypeSelector);
+  const zallProductTypes = useSelector(allProductTypeSelector);
   const isLoading = useSelector((state) => state.allProducts.loading);
+
+  let allProductTypes = zallProductTypes.filter((type) => {
+    return type.DaXoa === false;
+  });
+
   const handleLogout = () => {
     localStorage.removeItem("user");
   };
-  const handleLogin = () => {
-    let user = localStorage.getItem("user");
-    user = JSON.parse(user);
-    if (user == null) {
-      window.location.href = `/login`;
+
+  let option = "Login";
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user);
+  if (user !== null) {
+    option = "Logout";
+  }
+
+  const handleLogin = (link) => {
+    if (user !== null) {
+      window.location.href = link;
+    } else {
+      window.location.href = "/login";
     }
   };
 
   const handleFilterProducts = (maLsp) => {
-    setProductType(maLsp);
     dispatch(ProductTypeFilterChange(maLsp));
+  };
+  const [searchVal, setSearchVal] = useState("");
+  const handleSearch = (searchValue) => {
+    dispatch(SearchFilterChange(searchValue));
+    setSearchVal(searchValue);
   };
   useEffect(() => {
     dispatch(getAllProductType());
   }, []);
+
   return (
     <>
       <div className="top-header">
@@ -69,14 +87,18 @@ function Header() {
             <FontAwesomeIcon icon={faDollarSign} className="icon" />
             VND
           </div>
-          <div className="top-header-item" onClick={handleLogin}>
+
+          <div
+            className="top-header-item"
+            onClick={() => handleLogin("/myaccount")}
+          >
             <FontAwesomeIcon icon={faUser} className="icon" />
             My Accounts
           </div>
           <Link to="/login" onClick={handleLogout}>
             <div className="top-header-item">
               <FontAwesomeIcon icon={faRightFromBracket} className="icon" />
-              Logout
+              {option}
             </div>
           </Link>
         </div>
@@ -86,7 +108,12 @@ function Header() {
           <img src={logo} />
         </a>
         <div className="search-container">
-          <input type="text" name="" placeholder="Search here..." />
+          <input
+            type="text"
+            name=""
+            placeholder="Search here..."
+            onChange={(e) => handleSearch(e.target.value)}
+          />
           <div className="search-btn">Search</div>
         </div>
         <div className="header-menu">
@@ -95,28 +122,26 @@ function Header() {
             <div className="amount">2</div>
             Wishlist
           </div>
-          <Link to="/cart">
-            <div className="header-menu-item">
-              <FontAwesomeIcon
-                icon={faCartShopping}
-                onClick={handleLogin}
-                className="icon"
-              />
-              <div className="amount">2</div>
-              Giỏ hàng
-            </div>
-          </Link>
-          <Link to="/orders">
-            <div className="header-menu-item">
-              <FontAwesomeIcon
-                icon={faBox}
-                className="icon"
-                onClick={handleLogin}
-              />
-              <div className="amount">2</div>
-              Đơn hàng
-            </div>
-          </Link>
+
+          <div className="header-menu-item">
+            <FontAwesomeIcon
+              icon={faCartShopping}
+              onClick={() => handleLogin("/cart")}
+              className="icon"
+            />
+            <div className="amount">2</div>
+            Giỏ hàng
+          </div>
+
+          <div className="header-menu-item">
+            <FontAwesomeIcon
+              icon={faBox}
+              className="icon"
+              onClick={() => handleLogin("/orders")}
+            />
+            <div className="amount">2</div>
+            Đơn hàng
+          </div>
         </div>
       </div>
       <div className="header-red"></div>

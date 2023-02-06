@@ -22,3 +22,33 @@
   font-weight: 500;
   cursor: pointer;
 }
+.emptycart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.emptycart {
+  width: 300px !important;
+  height: 188px !important;
+  margin-bottom: 30px;
+}
+.continue-btn {
+  text-align: center;
+  width: auto;
+  height: auto;
+  background-color: $primary-color;
+  padding: 10px 20px;
+  border-radius: 20px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.trash-btn {
+  background-color: transparent;
+  &:hover {
+    color: $primary-color;
+  }
+}
