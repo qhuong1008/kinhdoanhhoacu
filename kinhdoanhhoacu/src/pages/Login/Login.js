@@ -47,7 +47,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (username == "" || password == "") {
-      alert("Vui lòng nhập đủ thông tin!");
+      alert("Vui lòng nhập đủ thông tinn!");
     } else {
       let loginInfo = {
         username: username,
